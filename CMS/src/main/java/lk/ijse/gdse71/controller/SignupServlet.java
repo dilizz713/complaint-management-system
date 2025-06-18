@@ -39,6 +39,7 @@ public class SignupServlet extends HttpServlet {
             boolean success = userDAO.addUser(user);
 
             if(success){
+                req.setAttribute("success", "Registered successfully!");
                 resp.sendRedirect("signin.jsp");
             }else{
                 req.setAttribute("error", "Signup failed");
