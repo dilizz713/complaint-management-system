@@ -31,11 +31,9 @@ Maven
 📂 Steps:
 
 1.Clone the repository:
-git clone https://github.com/your-username/complaint-management-system.git
-cd complaint-management-system
 
 2.Database Setup:
-Create a database named complaint_db
+Create a database named cms
 
 3.Run the SQL script (schema.sql) provided in the repo to create the required tables
 
