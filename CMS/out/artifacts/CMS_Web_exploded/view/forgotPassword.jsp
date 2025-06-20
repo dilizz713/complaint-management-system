@@ -99,7 +99,7 @@
 
         <div class="d-grid gap-2">
             <button type="submit" class="btn btn-primary">Reset Password</button>
-            <a href="signin.jsp" class="btn btn-outline-secondary">Back to Sign In</a>
+            <a href="index.jsp" class="btn btn-outline-secondary">Back to Sign In</a>
         </div>
     </form>
 </div>

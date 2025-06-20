@@ -39,7 +39,7 @@ public class ForgotPasswordServlet extends HttpServlet {
 
             if (success) {
                 req.setAttribute("success", "Password updated successfully.");
-                req.getRequestDispatcher("/view/signin.jsp").forward(req, resp);
+                req.getRequestDispatcher("/view/index.jsp").forward(req, resp);
             } else {
                 req.setAttribute("error", "No user found with that email.");
                 req.getRequestDispatcher("/view/forgotPassword.jsp").forward(req, resp);

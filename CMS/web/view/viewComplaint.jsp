@@ -12,7 +12,7 @@
 <%
     User user = (User) session.getAttribute("user");
     if (user == null || !"ADMIN".equals(user.getRole())) {
-        response.sendRedirect("signin.jsp");
+        response.sendRedirect("index.jsp");
         return;
     }
     List<Complain> complaints = (List<Complain>) request.getAttribute("complaints");

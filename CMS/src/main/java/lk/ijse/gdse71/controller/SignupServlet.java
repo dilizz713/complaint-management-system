@@ -49,7 +49,7 @@ public class SignupServlet extends HttpServlet {
 
             if(success){
                 req.setAttribute("success", "Registered successfully!");
-                req.getRequestDispatcher("/view/signin.jsp").forward(req, resp);
+                req.getRequestDispatcher("/view/index.jsp").forward(req, resp);
             }else{
                 req.setAttribute("error", "Signup failed");
                 req.getRequestDispatcher("/view/signup.jsp").forward(req, resp);

@@ -24,7 +24,7 @@ public class ViewAllComplaints extends HttpServlet {
         User user = (User) session.getAttribute("user");
 
         if(user == null || !"ADMIN".equals(user.getRole())) {
-            response.sendRedirect(request.getContextPath() + "/view/signin.jsp");
+            response.sendRedirect(request.getContextPath() + "/view/index.jsp");
             return;
         }
 
@@ -51,7 +51,7 @@ public class ViewAllComplaints extends HttpServlet {
         User user = (User) session.getAttribute("user");
 
         if (user == null || !"ADMIN".equals(user.getRole())) {
-            response.sendRedirect(request.getContextPath() + "/view/signin.jsp");
+            response.sendRedirect(request.getContextPath() + "/view/index.jsp");
             return;
         }
 

@@ -10,7 +10,7 @@
 <%
     User user = (User) session.getAttribute("user");
     if (user == null) {
-        response.sendRedirect("signin.jsp");
+        response.sendRedirect("index.jsp");
         return;
     }
 %>

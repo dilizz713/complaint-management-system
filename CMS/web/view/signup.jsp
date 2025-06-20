@@ -116,7 +116,7 @@
 
         <div class="d-grid gap-2">
             <button type="submit" class="btn btn-primary">Sign Up</button>
-            <a href="<%= request.getContextPath() %>/view/signin.jsp" class="btn btn-outline-secondary">Already have an account?</a>
+            <a href="<%= request.getContextPath() %>/view/index.jsp" class="btn btn-outline-secondary">Already have an account?</a>
         </div>
     </form>
 </div>

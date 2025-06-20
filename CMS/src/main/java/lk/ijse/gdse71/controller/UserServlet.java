@@ -22,7 +22,7 @@ public class UserServlet extends HttpServlet {
         User user = (User) session.getAttribute("user");
 
         if (user == null) {
-            resp.sendRedirect("signin.jsp");
+            resp.sendRedirect("index.jsp");
             return;
         }
 
@@ -38,7 +38,7 @@ public class UserServlet extends HttpServlet {
 
                 if(deleted){
                     session.invalidate();
-                    resp.sendRedirect(req.getContextPath() + "/view/signin.jsp");
+                    resp.sendRedirect(req.getContextPath() + "/view/index.jsp");
                 }else{
                     req.setAttribute("error", "Failed to delete user");
                     req.getRequestDispatcher("/view/settings.jsp").forward(req, resp);

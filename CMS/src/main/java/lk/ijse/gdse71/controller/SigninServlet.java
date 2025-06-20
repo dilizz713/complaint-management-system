@@ -23,7 +23,7 @@ public class SigninServlet extends HttpServlet {
 
         if(email == null || password == null || email.isEmpty() || password.isEmpty()) {
             req.setAttribute("error", "Please enter both email and password");
-            req.getRequestDispatcher("/view/signin.jsp").forward(req, resp);
+            req.getRequestDispatcher("/view/index.jsp").forward(req, resp);
             return;
         }
 
@@ -35,10 +35,10 @@ public class SigninServlet extends HttpServlet {
 
             if(user == null) {
                 req.setAttribute("error", "No account found with this email");
-                req.getRequestDispatcher("/view/signin.jsp").forward(req, resp);
+                req.getRequestDispatcher("/view/index.jsp").forward(req, resp);
             } else if (!user.getPassword().equals(password)) {
                 req.setAttribute("error", "Your Password is incorrect! Please try again");
-                req.getRequestDispatcher("/view/signin.jsp").forward(req, resp);
+                req.getRequestDispatcher("/view/index.jsp").forward(req, resp);
 
             }else{
                 HttpSession session = req.getSession();
@@ -48,7 +48,7 @@ public class SigninServlet extends HttpServlet {
         }catch (Exception e){
             e.printStackTrace();
             req.setAttribute("error", "Internal Server Error");
-            req.getRequestDispatcher("/view/signin.jsp").forward(req, resp);
+            req.getRequestDispatcher("/view/index.jsp").forward(req, resp);
         }
 
     }

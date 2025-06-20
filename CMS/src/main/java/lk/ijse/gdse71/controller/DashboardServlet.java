@@ -20,7 +20,7 @@ public class DashboardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
-            resp.sendRedirect("signin.jsp");
+            resp.sendRedirect("index.jsp");
             return;
         }
         User user = (User) session.getAttribute("user");
@@ -55,7 +55,7 @@ public class DashboardServlet extends HttpServlet {
             if(session != null) {
                 session.invalidate();
             }
-            resp.sendRedirect(req.getContextPath() + "/view/signin.jsp");
+            resp.sendRedirect(req.getContextPath() + "/view/index.jsp");
             return;
         }
 
