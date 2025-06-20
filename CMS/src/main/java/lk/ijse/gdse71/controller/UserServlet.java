@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lk.ijse.gdse71.dao.UserDAO;
+import lk.ijse.gdse71.db.DBConnection;
 import lk.ijse.gdse71.model.User;
 import org.apache.commons.dbcp2.BasicDataSource;
 
@@ -25,20 +26,32 @@ public class UserServlet extends HttpServlet {
             return;
         }
 
-        ServletContext context = getServletContext();
-        BasicDataSource ds = (BasicDataSource) context.getAttribute("dataSource");
+        BasicDataSource ds = DBConnection.getDataSource();
         UserDAO dao = new UserDAO(ds);
 
         String change = req.getParameter("change");
 
         try{
-            if("credentials".equals(change)){
+            /*----------------------                  DELETE USER             -------------------   */
+            if("delete".equals(change)){
+                boolean deleted = dao.deleteUser(user.getId());
+
+                if(deleted){
+                    session.invalidate();
+                    resp.sendRedirect(req.getContextPath() + "/view/signin.jsp");
+                }else{
+                    req.setAttribute("error", "Failed to delete user");
+                    req.getRequestDispatcher("/view/settings.jsp").forward(req, resp);
+                }
+
+                /*----------------------                  UPDATE USER EMAIL AND PASSWORD         -------------------   */
+            }else if("credentials".equals(change)){
                 String newEmail = req.getParameter("email");
                 String newPassword = req.getParameter("password");
 
                 if(newEmail == null || newEmail.isEmpty() && (newPassword == null || newPassword.isEmpty())){
                     req.setAttribute("error", "Please provide  email or password");
-                    req.getRequestDispatcher("/settings.jsp").forward(req, resp);
+                    req.getRequestDispatcher("/view/settings.jsp").forward(req, resp);
                     return;
 
                 }
@@ -58,7 +71,9 @@ public class UserServlet extends HttpServlet {
                 }else {
                     req.setAttribute("error", "Failed to update credentials");
                 }
-                req.getRequestDispatcher("/settings.jsp").forward(req, resp);
+                req.getRequestDispatcher("/view/settings.jsp").forward(req, resp);
+
+                /*----------------------                  UPDATE USER  DETAILS          -------------------   */
             }else{
                 String name = req.getParameter("name");
                 String nic = req.getParameter("nic");
@@ -66,7 +81,7 @@ public class UserServlet extends HttpServlet {
 
                 if(name == null || nic == null || department == null || name.isEmpty() || nic.isEmpty() || department.isEmpty()){
                     req.setAttribute("error", "Please provide  name, nic, department");
-                    req.getRequestDispatcher("/settings.jsp").forward(req, resp);
+                    req.getRequestDispatcher("/view/settings.jsp").forward(req, resp);
                     return;
                 }
 
@@ -81,12 +96,12 @@ public class UserServlet extends HttpServlet {
                 }else{
                     req.setAttribute("error", "Failed to update profile");
                 }
-                req.getRequestDispatcher("/settings.jsp").forward(req, resp);
+                req.getRequestDispatcher("/view/settings.jsp").forward(req, resp);
             }
         }catch (Exception e){
             e.printStackTrace();
             req.setAttribute("error", "Internal Server Error");
-            req.getRequestDispatcher("/settings.jsp").forward(req, resp);
+            req.getRequestDispatcher("/view/settings.jsp").forward(req, resp);
         }
     }
 }

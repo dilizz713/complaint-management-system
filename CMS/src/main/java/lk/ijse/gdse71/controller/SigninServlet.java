@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lk.ijse.gdse71.dao.UserDAO;
+import lk.ijse.gdse71.db.DBConnection;
 import lk.ijse.gdse71.model.User;
 import org.apache.commons.dbcp2.BasicDataSource;
 
@@ -22,23 +23,22 @@ public class SigninServlet extends HttpServlet {
 
         if(email == null || password == null || email.isEmpty() || password.isEmpty()) {
             req.setAttribute("error", "Please enter both email and password");
-            req.getRequestDispatcher("/signin.jsp").forward(req, resp);
+            req.getRequestDispatcher("/view/signin.jsp").forward(req, resp);
             return;
         }
 
         try{
-            ServletContext context = getServletContext();
-            BasicDataSource ds = (BasicDataSource) context.getAttribute("dataSource");
+            BasicDataSource ds = DBConnection.getDataSource();
             UserDAO userDAO = new UserDAO(ds);
 
             User user = userDAO.findByEmail(email);
 
             if(user == null) {
                 req.setAttribute("error", "No account found with this email");
-                req.getRequestDispatcher("/signin.jsp").forward(req, resp);
+                req.getRequestDispatcher("/view/signin.jsp").forward(req, resp);
             } else if (!user.getPassword().equals(password)) {
                 req.setAttribute("error", "Your Password is incorrect! Please try again");
-                req.getRequestDispatcher("/signin.jsp").forward(req, resp);
+                req.getRequestDispatcher("/view/signin.jsp").forward(req, resp);
 
             }else{
                 HttpSession session = req.getSession();
@@ -48,7 +48,7 @@ public class SigninServlet extends HttpServlet {
         }catch (Exception e){
             e.printStackTrace();
             req.setAttribute("error", "Internal Server Error");
-            req.getRequestDispatcher("/signin.jsp").forward(req, resp);
+            req.getRequestDispatcher("/view/signin.jsp").forward(req, resp);
         }
 
     }

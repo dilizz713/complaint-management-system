@@ -98,5 +98,36 @@ public class UserDAO {
     }
 
 
+    public boolean updatePasswordByEmail(String email, String newPassword) throws SQLException {
+        String sql = "update user set password = ? where email = ?";
 
+        Connection connection = dataSource.getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+
+        pstm.setString(1, newPassword);
+        pstm.setString(2, email);
+
+        return pstm.executeUpdate() > 0;
+    }
+
+    public boolean existsUser(String nic) throws SQLException {
+        String sql = "select count(*) from user where nic = ?";
+
+        Connection connection = dataSource.getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setString(1, nic);
+        ResultSet rs = pstm.executeQuery();
+        if(rs.next()) {
+            return rs.getInt(1) > 0;
+        }
+        return false;
+    }
+
+    public boolean deleteUser(int id) throws SQLException {
+        String sql = "delete from user where id = ?";
+        Connection connection = dataSource.getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setInt(1, id);
+        return pstm.executeUpdate() > 0;
+    }
 }
