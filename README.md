@@ -3,29 +3,45 @@
 A simple and efficient Complaint Management System built using Java Servlet, JSP, MySQL, and Bootstrap. This system follows the MVC architecture and includes role-based access for Admins and Employees.
 
 📌 Project Overview
+
 This system allows employees to submit complaints and admins to manage them efficiently. It is designed to help organizations track, review, and resolve internal issues.
 
 👥 Roles:
+
 Employee: Can register, log in, submit complaints, update profile, and view their complaint history.
+
 Admin: Can view all complaints from all users, update complaint statuses (Pending → In Progress → Resolved), and delete complaints.
 
 ✨ Key Features:
+
 User authentication and registration with validation
+
 Role-based access control
+
 CRUD operations for complaints
+
 Status update (Admin only)
+
 Account/profile management
+
 Responsive UI with Bootstrap
+
 Session handling and logout functionality
+
 Timestamps 
 
+
 ⚙️ Setup and Configuration Guide
+
 
 🧰 Prerequisites:
 
 Java JDK 21
+
 Apache Tomcat 9+
+
 MySQL 8+
+
 Maven 
 
 📂 Steps:
@@ -33,6 +49,7 @@ Maven
 1.Clone the repository:
 
 2.Database Setup:
+
 Create a database named cms
 
 3.Run the SQL script (schema.sql) provided in the repo to create the required tables
